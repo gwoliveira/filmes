@@ -48,4 +48,10 @@ public class AtorController {
         atorRepository.save(ator);
         return "redirect:/ator";
     }
+
+    @GetMapping("/excluir")
+    public String excluir(Model model, @RequestParam Integer id) {
+        atorRepository.delete(id);
+        return "redirect:/ator";
+    }
 }
