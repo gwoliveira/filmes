@@ -21,7 +21,7 @@
             </thead>
             <tbody>
             <tr th:each="ator, iter: ${atores}">
-                <th scope="row" th:text="${iter.index}">1</th>
+                <th scope="row" th:text="${ator.id}">1</th>
                 <td th:text="${ator.nome}"></td>
                 <td th:text="${ator.sexo}"></td>
                 <td>
