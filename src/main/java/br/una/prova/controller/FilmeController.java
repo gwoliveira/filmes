@@ -1,6 +1,8 @@
 package br.una.prova.controller;
 
 import br.una.prova.entity.Filme;
+import br.una.prova.repository.DiretorRepository;
+import br.una.prova.repository.FilmeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,20 +13,32 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/filme")
 public class FilmeController {
+    private FilmeRepository filmeRepository;
+    private DiretorRepository diretorRepository;
+
+    public FilmeController(FilmeRepository filmeRepository, DiretorRepository diretorRepository) {
+        this.filmeRepository = filmeRepository;
+        this.diretorRepository = diretorRepository;
+    }
+
     @GetMapping
     public String list(Model model) {
+        model.addAttribute("filmes", filmeRepository.findAll());
         return "filme/listar";
     }
 
     @GetMapping("/editar")
-    public String edit(Model model, @RequestParam Long filmeId) {
-        model.addAttribute("filme", new Filme());
+    public String edit(Model model, @RequestParam Integer id) {
+        model.addAttribute("filme", filmeRepository.findOne(id));
+        model.addAttribute("diretores", diretorRepository.findAll());
         return "filme/formulario";
     }
 
     @GetMapping("/novo")
     public String novo(Model model) {
         model.addAttribute("filme", new Filme());
+        model.addAttribute("diretores", diretorRepository.findAll());
+
         return "filme/formulario";
     }
 
@@ -33,6 +47,7 @@ public class FilmeController {
         if (bindingResult.hasErrors()) {
             return "filme/formulario";
         }
+        filmeRepository.save(filme);
         return "redirect:/filme";
     }
 
