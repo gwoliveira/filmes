@@ -1,6 +1,7 @@
 package br.una.prova.controller;
 
 import br.una.prova.entity.Filme;
+import br.una.prova.repository.AtorRepository;
 import br.una.prova.repository.DiretorRepository;
 import br.una.prova.repository.FilmeRepository;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,12 @@ import javax.validation.Valid;
 public class FilmeController {
     private FilmeRepository filmeRepository;
     private DiretorRepository diretorRepository;
+    private AtorRepository atorRepository;
 
-    public FilmeController(FilmeRepository filmeRepository, DiretorRepository diretorRepository) {
+    public FilmeController(FilmeRepository filmeRepository, DiretorRepository diretorRepository, AtorRepository atorRepository) {
         this.filmeRepository = filmeRepository;
         this.diretorRepository = diretorRepository;
+        this.atorRepository = atorRepository;
     }
 
     @GetMapping
@@ -31,6 +34,7 @@ public class FilmeController {
     public String edit(Model model, @RequestParam Integer id) {
         model.addAttribute("filme", filmeRepository.findOne(id));
         model.addAttribute("diretores", diretorRepository.findAll());
+        model.addAttribute("atores", atorRepository.findAll());
         return "filme/formulario";
     }
 
@@ -38,7 +42,7 @@ public class FilmeController {
     public String novo(Model model) {
         model.addAttribute("filme", new Filme());
         model.addAttribute("diretores", diretorRepository.findAll());
-
+        model.addAttribute("atores", atorRepository.findAll());
         return "filme/formulario";
     }
 
