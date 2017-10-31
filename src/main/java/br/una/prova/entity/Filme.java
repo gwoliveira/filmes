@@ -1,5 +1,6 @@
 package br.una.prova.entity;
 
+import org.hibernate.annotations.Formula;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -16,6 +17,9 @@ public class Filme {
     private String nome;
 
     private Integer ano;
+
+    @Formula("(select AVG(v.avaliacao + 0.0) from voto v where v.filme_id = id)")
+    private Double mediaAvaliacoes;
 
     @ManyToOne
     @JoinColumn(name = "diretor_id", referencedColumnName = "id")
@@ -68,6 +72,10 @@ public class Filme {
 
     public void setAtores(Set<Ator> atores) {
         this.atores = atores;
+    }
+
+    public Double getMediaAvaliacoes() {
+        return mediaAvaliacoes;
     }
 
     @Override

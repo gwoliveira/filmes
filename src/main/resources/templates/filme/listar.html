@@ -17,6 +17,7 @@
                 <th>Nome</th>
                 <th>A quanto tempo foi lançado</th>
                 <th>Diretor</th>
+                <th>Media Votos</th>
                 <th>Ações</th>
             </tr>
             </thead>
@@ -27,6 +28,7 @@
                 <td th:inline="text" th:if="${filme.ano}">[[2017 - ${filme.ano}]] anos ([[${filme.ano}]])</td>
                 <td th:inline="text" th:unless="${filme.ano}"> Não informado </td>
                 <td th:text="${filme.diretor.nome}"></td>
+                <td th:text="${filme.mediaAvaliacoes}"></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Ações">
                         <a th:href="@{/filme/editar(id=${filme.id})}" class="btn btn-info btn-sm">Editar</a>

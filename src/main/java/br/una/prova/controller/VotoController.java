@@ -37,6 +37,6 @@ public class VotoController {
             return "voto/formulario";
         }
         votoRepository.save(voto);
-        return "redirect:/voto";
+        return "redirect:/filme";
     }
 }
