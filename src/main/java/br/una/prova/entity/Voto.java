@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -12,7 +13,9 @@ public class Voto {
     @GeneratedValue
     private Integer id;
     @ManyToOne
+    @NotNull
     private Filme filme;
+    @NotNull
     private Integer avaliacao;
 
     public Integer getId() {
