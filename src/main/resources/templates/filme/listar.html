@@ -37,7 +37,25 @@
                 </td>
             </tr>
             </tbody>
-        </table></div>
+        </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${!filmes.hasPrevious()}? 'disabled'">
+                        <a class="page-link" th:href="@{/filme(page=${filmes.getNumber()-1},size=${filmes.getSize()})}">Anterior</a>
+                    </li>
+                    <li class="page-item" th:classappend="${i == filmes.getNumber()}? 'active'"
+                        th:each="i : ${#numbers.sequence( 0, filmes.getTotalPages()-1)}">
+                        <a class="page-link"
+                           th:href="@{/filme(page=${i},size=${filmes.getSize()})}"
+                           th:text="${i+1}">1</a>
+                    </li>
+                    <li class="page-item" th:classappend="${!filmes.hasNext()}? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/filme(page=${filmes.getNumber()+1},size=${filmes.getSize()})}">Proxima</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
     <div class="row">
         <div class="col-sm-12">

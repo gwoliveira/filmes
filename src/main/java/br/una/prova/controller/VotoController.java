@@ -1,6 +1,5 @@
 package br.una.prova.controller;
 
-import br.una.prova.entity.Filme;
 import br.una.prova.entity.Voto;
 import br.una.prova.repository.FilmeRepository;
 import br.una.prova.repository.VotoRepository;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
