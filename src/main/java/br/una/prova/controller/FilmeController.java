@@ -5,6 +5,7 @@ import br.una.prova.repository.AtorRepository;
 import br.una.prova.repository.DiretorRepository;
 import br.una.prova.repository.FilmeRepository;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +27,7 @@ public class FilmeController {
     }
 
     @GetMapping
-    public String list(Model model, Pageable pageable) {
+    public String list(Model model, @PageableDefault(size = 5)  Pageable pageable) {
         model.addAttribute("filmes", filmeRepository.findAll(pageable));
         return "filme/listar";
     }
