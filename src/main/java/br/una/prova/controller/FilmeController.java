@@ -11,7 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Collections;
+import java.util.Properties;
 
 @Controller
 @RequestMapping("/filme")
@@ -27,7 +30,7 @@ public class FilmeController {
     }
 
     @GetMapping
-    public String list(Model model, @PageableDefault(size = 5)  Pageable pageable) {
+    public String list(Model model, @PageableDefault(size = 5) Pageable pageable) {
         model.addAttribute("filmes", filmeRepository.findAll(pageable));
         return "filme/listar";
     }
@@ -55,6 +58,13 @@ public class FilmeController {
         }
         filmeRepository.save(filme);
         return "redirect:/filme";
+    }
+
+    @RequestMapping(value = "/relatorio", method = RequestMethod.GET)
+    public String relatorio(Model model, @RequestParam(defaultValue = "pdf") String format, HttpServletResponse response) {
+        model.addAttribute("datasource", filmeRepository.findAll());
+        model.addAttribute("format", format);
+        return "reports/filmes";
     }
 
 }
