@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.Properties;
@@ -53,6 +54,7 @@ public class FilmeController {
 
     @PostMapping("/salvar")
     public String salvar(@Valid Filme filme, BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
             return "filme/formulario";
         }
@@ -61,7 +63,9 @@ public class FilmeController {
     }
 
     @RequestMapping(value = "/relatorio", method = RequestMethod.GET)
-    public String relatorio(Model model, @RequestParam(defaultValue = "pdf") String format, HttpServletResponse response) {
+    public String relatorio(Model model,
+           @RequestParam(defaultValue = "pdf") String format,
+           HttpServletResponse response) {
         model.addAttribute("datasource", filmeRepository.findAll());
         model.addAttribute("format", format);
         return "reports/filmes";

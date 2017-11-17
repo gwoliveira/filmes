@@ -8,6 +8,7 @@
 	<field name="nome" class="java.lang.String"/>
 	<field name="diretor" class="br.una.prova.entity.Diretor"/>
 	<field name="ano" class="java.lang.Integer"/>
+	<field name="mediaAvaliacoes" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -43,10 +44,16 @@
 				</reportElement>
 				<text><![CDATA[ano]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="454" y="0" width="100" height="25" uuid="e2f23973-4249-4e69-9ff1-e34001785ca9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62a68aca-53e2-4de5-8303-6df28b24cdf7"/>
+				</reportElement>
+				<text><![CDATA[Avaliação]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="25" splitType="Stretch">
+		<band height="39" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="200" height="20" uuid="3587b979-2e02-4323-b110-2c92844e88ef">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="68c0dc06-b68a-467f-9c4c-9a4a404d3f76"/>
@@ -64,6 +71,12 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b5b424b3-aa94-43da-8884-9a762de61fb3"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{ano}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="100" height="30" uuid="40aed73a-06e2-43d4-948a-d019c170029b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62a68aca-53e2-4de5-8303-6df28b24cdf7"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{mediaAvaliacoes}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
